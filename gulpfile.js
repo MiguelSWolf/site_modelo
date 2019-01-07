@@ -43,8 +43,8 @@ function cleanjs() {
 // Optimize Images
 function images() {
   return gulp
-    .src("./assets/img/**/*")
-    .pipe(newer("./_site/assets/img"))
+    .src("./original/**/*")
+    .pipe(newer("./images"))
     .pipe(
       imagemin([
         imagemin.gifsicle({ interlaced: true }),
@@ -60,7 +60,7 @@ function images() {
         })
       ])
     )
-    .pipe(gulp.dest("./_site/assets/img"));
+    .pipe(gulp.dest("./images"));
 }
 
 // CSS task
@@ -69,7 +69,7 @@ function css() {
     .src("./scss/**/*.scss")
     .pipe(plumber())
     .pipe(sass({ outputStyle: "expanded" }))
-    .pipe(gulp.dest("./css/"))
+    .pipe(gulp.dest("./style/"))
     .pipe(rename({ suffix: ".min" }))
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(gulp.dest("./style/"))
